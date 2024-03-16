@@ -28,7 +28,8 @@
               (-> tx
                   (c/assoc-at [:comments comment-id] comment)
                   (c/update-at [:counters :id] inc)
-                  (c/update-at [:counters :comments] inc)))
+                  (c/update-at [:counters :comments] inc))
+              )
             )
     )
   )

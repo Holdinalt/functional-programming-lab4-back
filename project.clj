@@ -13,6 +13,7 @@
                  [ring/ring-json "0.5.0"]
                  [fogus/ring-edn "0.3.0"]
                  [codax/codax "1.4.0"]
+                 [clojure-interop/javax.imageio "1.0.3"]
                  ]
 
   :plugins [[lein-ring "0.12.5"]]
