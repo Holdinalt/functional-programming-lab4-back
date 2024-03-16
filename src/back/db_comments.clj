@@ -1,5 +1,8 @@
 (ns back.db-comments
-  (:require [codax.core :as c]))
+  (:require
+    [codax.core :as c]
+    [back.db-posts]
+    ))
 
 (def db-comments (c/open-database! "dataBase/comments"))
 
@@ -9,22 +12,24 @@
   (c/assoc-at tx [:counters] {:id 0 :comments 0}))
 
 (defn add-comment [post-id author-name text image]
-  (c/with-write-transaction
-    [db-comments tx]
-    (let [comment-id (c/get-at tx [:counters :id])
-          comment {:id comment-id
-                :author-name author-name
-                :text text
-                :image image
-                :post-id post-id
-                ;:time (System/currentTimeMillis)
-                }
-          l (println comment)
-          ]
-      (-> tx
-          (c/assoc-at [:comments comment-id] comment)
-          (c/update-at [:counters :id] inc)
-          (c/update-at [:counters :comments] inc)))
+  (cond
+    (nil? (back.db-posts/get-post post-id)) "No post"
+    :else (c/with-write-transaction
+            [db-comments tx]
+            (let [comment-id (c/get-at tx [:counters :id])
+                  comment {:id comment-id
+                           :author-name author-name
+                           :text text
+                           :image image
+                           :post-id post-id
+                           :time (System/currentTimeMillis)
+                           }
+                  ]
+              (-> tx
+                  (c/assoc-at [:comments comment-id] comment)
+                  (c/update-at [:counters :id] inc)
+                  (c/update-at [:counters :comments] inc)))
+            )
     )
   )
 
