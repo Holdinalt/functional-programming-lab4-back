@@ -1,6 +1,4 @@
 (ns back.core
-  (:use ring.util.response)
-  (:use ring.middleware.edn)
   (:require [compojure.core :refer [GET POST defroutes]]
             [compojure.coercions :refer [as-int]]
             [compojure.route :as route]
