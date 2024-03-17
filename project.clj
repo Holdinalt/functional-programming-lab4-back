@@ -17,5 +17,4 @@
 
   :plugins [[lein-ring "0.12.5"]]
   :ring {:handler back.core/app}
-  :profiles
   )

@@ -27,6 +27,8 @@
         imageName (if (not (= filename "")) imageName nil)
         ]
 
+    (println "got new comment - " text author-name imageName)
+
     (back.db-comments/add-comment (Integer/parseInt "0") author-name text imageName)
 
     (let [tempfile (-> params :image :tempfile)
@@ -59,6 +61,7 @@
         text (:text params)
         image (:image params)
         ]
+    (println "got new post" title text author-name)
     (back.db-posts/add-post author-name title text image)
     )
   )
