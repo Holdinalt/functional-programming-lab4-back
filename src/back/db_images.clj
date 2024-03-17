@@ -1,7 +1,6 @@
 (ns back.db-images
   (:require
-    [codax.core :as c]
-    ))
+   [codax.core :as c]))
 
 (def db-images (c/open-database! "dataBase/images"))
 
@@ -15,7 +14,5 @@
     [db-images tx]
     (-> tx
         (c/update-at [:counters :id] inc)
-        (c/update-at [:counters :images] inc))
-    )
-  (c/get-at! db-images [:counters :id])
-  )
+        (c/update-at [:counters :images] inc)))
+  (c/get-at! db-images [:counters :id]))
