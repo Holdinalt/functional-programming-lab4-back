@@ -31,7 +31,7 @@
     [db-posts tx]
     (cond (not (c/get-at tx [:posts post-id])) nil
           :else (let [data (c/seek-at tx [:posts])]
-                  (filter #(= post-id (first %1)) data)
+                  (second (first (filter #(= post-id (first %1)) data)))
                   )
           )
     )

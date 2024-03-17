@@ -10,7 +10,6 @@
                  [ring-cors/ring-cors "0.1.13"]
                  [ring/ring-codec "1.1.3"]
                  [metosin/ring-http-response "0.9.3"]
-                 [ring/ring-json "0.5.0"]
                  [fogus/ring-edn "0.3.0"]
                  [codax/codax "1.4.0"]
                  [clojure-interop/javax.imageio "1.0.3"]
@@ -19,5 +18,4 @@
   :plugins [[lein-ring "0.12.5"]]
   :ring {:handler back.core/app}
   :profiles
-  {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring/ring-mock "0.3.2"]]}})
+  )

@@ -37,11 +37,11 @@
 (defn get-comments [post-id]
   (c/with-read-transaction
     [db-comments tx]
-    (let [data (c/seek-at tx [:comments])]
+    (let [data (c/get-at tx [:comments])]
       (reduce
         (fn [accum val]
           (cond
-            (= (:post-id (second val)) post-id) (conj accum [(second val)])
+            (= (:post-id (second val)) post-id) (conj accum (second val))
             :else accum
             )
           )
