@@ -19,7 +19,7 @@
     (= name "")
     (nil? name))))
 
-(defn add-comment [{:keys [params] :as request}]
+(defn add-comment [{:keys [params]}]
   (let [author-name (-> params :name)
         text (-> params :text)
         imageName (str (back.db-images/get-image-name) ".jpg")

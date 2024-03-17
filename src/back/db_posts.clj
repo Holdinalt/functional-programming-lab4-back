@@ -3,6 +3,8 @@
 
 (def db-posts (c/open-database! "dataBase/posts"))
 
+(def tx)
+
 (c/with-write-transaction
   [db-posts tx]
   (c/assoc-at tx [:counters] {:id 0 :posts 0}))

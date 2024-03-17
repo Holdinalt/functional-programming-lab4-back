@@ -5,6 +5,8 @@
 
 (def db-comments (c/open-database! "dataBase/comments"))
 
+(def tx)
+
 ;;;; init
 (c/with-write-transaction
   [db-comments tx]

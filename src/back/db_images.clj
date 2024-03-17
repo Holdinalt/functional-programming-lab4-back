@@ -4,6 +4,8 @@
 
 (def db-images (c/open-database! "dataBase/images"))
 
+(def tx)
+
 ;;;; init
 (c/with-write-transaction
   [db-images tx]
