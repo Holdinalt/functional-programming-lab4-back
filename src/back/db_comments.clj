@@ -8,9 +8,9 @@
 (def tx)
 
 ;;;; init
-(c/with-write-transaction
-  [db-comments tx]
-  (c/assoc-at tx [:counters] {:id 0 :comments 0}))
+;(c/with-write-transaction
+;  [db-comments tx]
+;  (c/assoc-at tx [:counters] {:id 0 :comments 0}))
 
 (defn add-comment [post-id author-name text image]
   (cond

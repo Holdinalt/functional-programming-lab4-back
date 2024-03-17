@@ -5,9 +5,9 @@
 
 (def tx)
 
-(c/with-write-transaction
-  [db-posts tx]
-  (c/assoc-at tx [:counters] {:id 0 :posts 0}))
+;(c/with-write-transaction
+;  [db-posts tx]
+;  (c/assoc-at tx [:counters] {:id 0 :posts 0}))
 
 (defn add-post [author-name title text image]
   (c/with-write-transaction

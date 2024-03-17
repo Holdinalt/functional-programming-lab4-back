@@ -7,9 +7,9 @@
 (def tx)
 
 ;;;; init
-(c/with-write-transaction
-  [db-images tx]
-  (c/assoc-at tx [:counters] {:id 0 :images 0}))
+;(c/with-write-transaction
+;  [db-images tx]
+;  (c/assoc-at tx [:counters] {:id 0 :images 0}))
 
 (defn get-image-name []
   (c/with-write-transaction
