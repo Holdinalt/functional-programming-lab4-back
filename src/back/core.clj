@@ -1,8 +1,8 @@
 (ns back.core
   (:use ring.util.response)
   (:use ring.middleware.edn)
-  (:require [compojure.core :refer :all]
-            [compojure.coercions :refer :all]
+  (:require [compojure.core :refer [GET POST defroutes]]
+            [compojure.coercions :refer [as-int]]
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [ring.middleware.multipart-params :refer [wrap-multipart-params]]
