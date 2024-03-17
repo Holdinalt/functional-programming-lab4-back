@@ -12,18 +12,21 @@
             [back.db-images]
             [clojure.java.io]
             [clojure.string]
+            [ring.middleware.edn]
             [ring.util.response :refer [file-response header content-type]]))
 
-;(defn add-post [params]
-;  (println params)
-;  )
+(defn is-file [name]
+  (not
+   (or
+    (= name "")
+    (nil? name))))
 
 (defn add-comment [{:keys [params] :as request}]
   (let [author-name (-> params :name)
         text (-> params :text)
         imageName (str (back.db-images/get-image-name) ".jpg")
         filename (-> params :image :filename)
-        imageName (if (not (= filename "")) imageName nil)]
+        imageName (if (is-file filename) imageName nil)]
 
     (println "got new comment - " text author-name imageName)
 
@@ -31,7 +34,7 @@
 
     (let [tempfile (-> params :image :tempfile)
           filename (-> params :image :filename)]
-      (when (not (= filename ""))
+      (when (is-file filename)
         (clojure.java.io/copy
          (clojure.java.io/file tempfile)
          (clojure.java.io/file (str "./resources/pictures/" imageName))))))
@@ -52,10 +55,6 @@
         image (:image params)]
     (println "got new post" title text author-name)
     (back.db-posts/add-post author-name title text image)))
-
-;(defn add-comment [{:keys [post-id author-name text image]}]
-;  (back.db-comments/add-comment (Integer/parseInt post-id) author-name text image)
-;  )
 
 (defn formatJSON [objec]
   (-> objec
@@ -79,6 +78,6 @@
              (wrap-cors :access-control-allow-origin [#".*"]
                         :access-control-allow-methods [:delete :get
                                                        :patch :post :put])
-             (wrap-edn-params)
+             (ring.middleware.edn/wrap-edn-params)
              (wrap-multipart-params)
              (wrap-defaults (assoc-in site-defaults [:security :anti-forgery] false))))
